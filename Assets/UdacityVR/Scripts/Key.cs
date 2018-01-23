@@ -5,10 +5,15 @@ using UnityEngine;
 public class Key : MonoBehaviour 
 {
     //Create a reference to the KeyPoofPrefab and Door
+    public GameObject keyProof;
+    public GameObject Door;
 
-	void Update()
+    public float floatingSpeed = 2f;
+
+    void Update()
 	{
-		//Not required, but for fun why not try adding a Key Floating Animation here :)
+        //Not required, but for fun why not try adding a Key Floating Animation here :)        
+        transform.SetPositionAndRotation(transform.position + new Vector3(0f, Mathf.Sin(Time.time * floatingSpeed) * 0.01f, 0f), Quaternion.Euler(-90f, Time.time * 100f, 0f));
 	}
 
 	public void OnKeyClicked()
@@ -18,6 +23,8 @@ public class Key : MonoBehaviour
         // Call the Unlock() method on the Door
         // Set the Key Collected Variable to true
         // Destroy the key. Check the Unity documentation on how to use Destroy
+        
+        Destroy(this);
     }
 
 }

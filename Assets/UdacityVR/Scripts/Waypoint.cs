@@ -130,7 +130,7 @@ public class Waypoint : MonoBehaviour
 		
 		_audio_source.Play();
 
-		Camera.main.transform.parent.transform.position = gameObject.transform.position + new Vector3(0f, 3f, 0f);
+		Camera.main.transform.parent.transform.position = gameObject.transform.position + new Vector3(0f, 2f, 0f);
 	}
 
 
