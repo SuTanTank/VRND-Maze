@@ -8,7 +8,14 @@ public class Key : MonoBehaviour
     public GameObject keyPoof;
     public GameObject door;
     public float floatingSpeed = 2f;
-    public GameObject player;    
+    public GameObject player;
+    private AudioSource audioSource;
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;        
+    }
+
     void Start()
     {       
         
@@ -34,10 +41,11 @@ public class Key : MonoBehaviour
             Debug.Log(poof.name);
             poof.GetComponent<ParticleSystem>().Play();
             player.GetComponent<PlayerScript>().CollectKey();
+            audioSource.Play();
             GetComponent<Renderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
             poof.GetComponent<DieAfterSeconds>().enabled = true;
-            Destroy(gameObject);
+            Destroy(gameObject, 4f);
         }
     }
 
