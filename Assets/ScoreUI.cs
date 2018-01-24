@@ -4,7 +4,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Text))]
 public class ScoreUI : MonoBehaviour
 {
-    private const string DISPLAY_SCORE_FORMAT = "Score: {0, 5} Coins Collected: (1, 3) Time Used: {2:0.0}s";
+    private const string DISPLAY_SCORE_FORMAT = "Score: {0, 5} Coins Collected: (1, 3) Time Used: {2:0.0}s\n";
     
     private const float UI_LABEL_START_X = 50.0f;
     private const float UI_LABEL_START_Y = 50.0f;
@@ -34,6 +34,10 @@ public class ScoreUI : MonoBehaviour
     {
         float timeUsed = (Time.time - player.startTime);
         scoreText = string.Format(DISPLAY_SCORE_FORMAT, player.score, player.nCoins, timeUsed);
+        if (player.hasKey)
+        {
+            scoreText += "Key Collected";
+        }
     }
 
     void OnGUI()

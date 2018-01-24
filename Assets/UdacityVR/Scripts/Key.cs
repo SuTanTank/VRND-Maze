@@ -6,14 +6,12 @@ public class Key : MonoBehaviour
 {
     //Create a reference to the KeyPoofPrefab and Door
     public GameObject keyPoof;
-    public GameObject Door;
+    public GameObject door;
     public float floatingSpeed = 2f;
-    public GameObject player;
-    private Transform _transform;
+    public GameObject player;    
     void Start()
-    {
-        keyPoof.GetComponent<ParticleSystem>().Stop();
-        _transform = gameObject.transform;
+    {       
+        
     }
     void Update()
 	{
@@ -27,12 +25,19 @@ public class Key : MonoBehaviour
         // Make sure the poof animates vertically
         // Call the Unlock() method on the Door
         // Set the Key Collected Variable to true
-        // Destroy the key. Check the Unity documentation on how to use Destroy
-        Debug.Log("Key Collected!");
-        GameObject poof = Object.Instantiate(keyPoof, _transform);
-        poof.GetComponent<ParticleSystem>().Play();
-        player.GetComponent<PlayerScript>().CollectKey();
-        Destroy(gameObject);
+        // Destroy the key. Check the Unity documentation on how to use Destroy        
+        if (!player.GetComponent<PlayerScript>().hasKey)
+        {
+            Debug.Log("Key Collected!");
+            door.GetComponent<Door>().Unlock();
+            GameObject poof = Object.Instantiate(keyPoof, transform.position + new Vector3(0f, 1f, 0f), transform.rotation);
+            Debug.Log(poof.name);
+            poof.GetComponent<ParticleSystem>().Play();
+            player.GetComponent<PlayerScript>().CollectKey();
+            GetComponent<Renderer>().enabled = false;
+            GetComponent<Collider>().enabled = false;
+            poof.GetComponent<DieAfterSeconds>().enabled = true;
+        }
     }
 
 }
