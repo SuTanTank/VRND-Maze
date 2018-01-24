@@ -37,6 +37,7 @@ public class Key : MonoBehaviour
             GetComponent<Renderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
             poof.GetComponent<DieAfterSeconds>().enabled = true;
+            Destroy(gameObject);
         }
     }
 
