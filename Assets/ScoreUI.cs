@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Text))]
 public class ScoreUI : MonoBehaviour
 {
-    private const string DISPLAY_SCORE_FORMAT = "Score: {0, 5} Coins Collected: {1, 3} Time Used: {2:0.0}s\n";
+    private const string DISPLAY_SCORE_FORMAT = "Score: {0, 5} Coins: {1, 3} Time Used: {2:0.0}s\n";
     
     private const float UI_LABEL_START_X = 50.0f;
     private const float UI_LABEL_START_Y = 50.0f;
@@ -14,20 +13,17 @@ public class ScoreUI : MonoBehaviour
     private GUIStyle guiLabelStyle;
     private Rect guiRectLeft =
       new Rect(UI_LABEL_START_X, UI_LABEL_START_Y, UI_LABEL_SIZE_X, UI_LABEL_SIZE_Y);
-#if !UNITY_EDITOR
-  private Rect guiRectRight = new Rect(Screen.width / 2 + UI_LABEL_START_X,
-      Screen.height - UI_LABEL_START_Y, UI_LABEL_SIZE_X, UI_LABEL_SIZE_Y);
-#endif  // !UNITY_EDITOR
 
     private string scoreText;    
 
-    public Color textColor = Color.white;
+    public Color textColor = Color.red;
     public GameObject playerObject;
     private PlayerScript player;
 
     void Awake()
     {
-        player = playerObject.GetComponentInParent<PlayerScript>();        
+        player = playerObject.GetComponentInParent<PlayerScript>();
+        GetComponent<Text>().color = textColor;
     }
 
     void LateUpdate()
@@ -39,23 +35,10 @@ public class ScoreUI : MonoBehaviour
             scoreText += "Key Collected! Get to the door NOW!";
         }
         if (player.hasKey && player.finished)
-            scoreText += "Game ends, click the sign to restart.";
+            scoreText += "Click to restart.";
+        GetComponent<Text>().text = scoreText;
+
+
     }
 
-    void OnGUI()
-    {
-        if (guiLabelStyle == null)
-        {
-            guiLabelStyle = new GUIStyle(GUI.skin.label);
-            guiLabelStyle.richText = false;
-            guiLabelStyle.fontSize = 14;
-        }
-
-        // Draw FPS text.
-        GUI.color = textColor;
-        GUI.Label(guiRectLeft, scoreText, guiLabelStyle);
-#if !UNITY_EDITOR
-    GUI.Label(guiRectRight, fpsText, guiLabelStyle);
-#endif  // !UNITY_EDITOR
-    }
 }

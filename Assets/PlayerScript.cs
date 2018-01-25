@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
-    private int INITIAL_SCORE = 2000;
+    private int INITIAL_SCORE = 3000;
     public bool hasKey = false;
     public int score;
     public int nCoins = 0;
@@ -22,6 +22,7 @@ public class PlayerScript : MonoBehaviour {
             usedTime = Time.time - startTime;
         }
         score = INITIAL_SCORE - (int)Mathf.Round(10 * usedTime) + 1000 * nCoins;
+        score = Mathf.Max(score, nCoins * 1000);
     }
     
     public void CollectCoin()
