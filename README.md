@@ -13,4 +13,4 @@ Tan Su
  - I didn't raise the door as required in the project specs. Instead, I rotated the left/rigth part of the door by 90 degree. 
  - The collider of the waypoints are set to longer than the actual cube for easier clicking. 
  - The camera are set to be a higher position above the waypoints' cube, since the cube may blocking the view. 
-
+ - I add a HUD to display the time used and the number of coins collected. 
