@@ -65,9 +65,9 @@ public class Waypoint : MonoBehaviour
 
 	void Update()
 	{
-		bool occupied 	= Camera.main.transform.parent.transform.position == gameObject.transform.position;
+		bool occupied 	= Camera.main.transform.parent.transform.position == gameObject.transform.position + new Vector3(0f, 2f, 0f);
 
-		switch(_state)
+        switch (_state)
 		{
 			case State.Idle:
 				Idle();

@@ -9,6 +9,18 @@ public class Door : MonoBehaviour
     // Create a boolean value called "opening" that can be checked in Update() 
     private bool opening = false;
 
+    public AudioClip lockedSound;
+    public AudioClip openSound;
+
+    private AudioSource audioSource;
+
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+    }
+
     void Update() {
         // If the door is opening and it is not fully raised
             // Animate the door raising up
@@ -20,11 +32,14 @@ public class Door : MonoBehaviour
         if (!locked)
         {
             opening = true;
+            audioSource.clip = openSound;
+            audioSource.Play();
+            Destroy(gameObject, 1f);
         }
         else
         {
-            // (optionally) Else
-            // Play a sound to indicate the door is locked
+            audioSource.clip = lockedSound;
+            audioSource.Play();
         }
 
     }
