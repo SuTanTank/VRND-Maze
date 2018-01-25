@@ -33,11 +33,13 @@ public class ScoreUI : MonoBehaviour
     void LateUpdate()
     {
         float timeUsed = (Time.time - player.startTime);
-        scoreText = string.Format(DISPLAY_SCORE_FORMAT, player.score, player.nCoins, timeUsed);
-        if (player.hasKey)
+        scoreText = string.Format(DISPLAY_SCORE_FORMAT, player.score, player.nCoins, player.usedTime);
+        if (player.hasKey && !player.finished)
         {
-            scoreText += "Key Collected";
+            scoreText += "Key Collected! Get to the door NOW!";
         }
+        if (player.hasKey && player.finished)
+            scoreText += "Game ends, click the sign to restart.";
     }
 
     void OnGUI()
