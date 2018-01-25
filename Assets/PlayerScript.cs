@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
     private int INITIAL_SCORE = 2000;
-    public bool hasKey = true;
+    public bool hasKey = false;
     public int score;
     public int nCoins = 0;
     public float startTime;
     public bool finished = false;
     public float usedTime = 0f;
     // Use this for initialization
-    void Start () {
-        hasKey = true;
+    void Start () {        
         startTime = Time.time;
 	}
 	
